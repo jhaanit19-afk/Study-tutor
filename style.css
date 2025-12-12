@@ -1,0 +1,170 @@
+/* style.css - Dark Minimal UI */
+
+body.dark-bg {
+    background: #0d0d0d;
+    color: #ffffff;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #222;
+}
+
+.title {
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: #111;
+    padding: 12px 0;
+    border-bottom: 1px solid #222;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.navbar a:hover {
+    background: #222;
+}
+
+/* Search Box */
+.search-box {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-box input {
+    width: 90%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: none;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    border: 1px solid #333;
+}
+
+/* Cards */
+.subjects {
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.card {
+    background: #1a1a1a;
+    padding: 18px 25px;
+    border-radius: 10px;
+    border: 1px solid #222;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card:hover {
+    background: #222;
+}
+
+/* Trending List */
+.trending {
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.trending h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.trend-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.trend-item {
+    background: #1a1a1a;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #222;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.trend-item:hover {
+    background: #222;
+}
+
+/* Forms */
+.form-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    border: 1px solid #222;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 12px 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #0d0d0d;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #222;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.form-container button:hover {
+    background: #333;
+}
+
+.form-container p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-container p a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+.form-container p a:hover {
+    text-decoration: underline;
+}
