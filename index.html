@@ -73,7 +73,49 @@
             <div class="trend-item">Class 12 Chemistry - 2021</div>
         </div>
     </section>
-
     <script src="js/app.js"></script>
 </body>
+
+    <script>
+  async function uploadNotes() {
+    // 1️⃣ Get file and title from HTML inputs
+    const file = document.getElementById('noteFile').files[0];
+    const title = document.getElementById('noteTitle').value;
+
+    if (!file || !title) {
+      alert("Please enter a title and select a file!");
+      return;
+    }
+
+    try {
+      // 2️⃣ Upload file to Firebase Storage
+      const storageRef = storage.ref('notes/' + file.name);
+      await storageRef.put(file);
+
+      // 3️⃣ Get the file URL
+      const url = await storageRef.getDownloadURL();
+
+      // 4️⃣ Save note info in Firestore
+      await db.collection('notes').add({
+        title: title,
+        fileUrl: url,
+        uploadedBy: 'Tutor1',  // You can dynamically set tutor
+        date: new Date()
+      });
+
+      // 5️⃣ Alert success and clear inputs
+      alert('Note uploaded successfully!');
+      document.getElementById('noteTitle').value = '';
+      document.getElementById('noteFile').value = '';
+
+    } catch (error) {
+      console.error('Error uploading note:', error);
+      alert('Upload failed! Check console.');
+    }
+  }
+</script>
+    <h2>Upload Notes</h2>
+<input type="text" id="noteTitle" placeholder="Enter Note Title" />
+<input type="file" id="noteFile" />
+<button onclick="uploadNotes()">Upload Note</button>
 </html>
