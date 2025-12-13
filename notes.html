@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const storage = firebase.storage();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyHub - Notes</title>
@@ -48,4 +66,43 @@
 
     <script src="js/app.js"></script>
 </body>
+    <h2>Upload PYQ</h2>
+<input type="text" id="pyqTitle" placeholder="Enter PYQ Title" />
+<input type="file" id="pyqFile" />
+<button onclick="uploadPYQ()">Upload PYQ</button>
+    <script>
+  async function uploadPYQ() {
+    const file = document.getElementById('pyqFile').files[0];
+    const title = document.getElementById('pyqTitle').value;
+
+    if (!file || !title) {
+      alert("Please enter PYQ title and select a file!");
+      return;
+    }
+
+    try {
+      // 1️⃣ Upload file to Firebase Storage
+      const storageRef = storage.ref('pyqs/' + file.name);
+      await storageRef.put(file);
+
+      // 2️⃣ Get file URL
+      const url = await storageRef.getDownloadURL();
+
+      // 3️⃣ Save in Firestore
+      await db.collection('pyqs').add({
+        title: title,
+        fileUrl: url,
+        uploadedBy: 'Admin',  // Change if needed
+        date: new Date()
+      });
+
+      alert('PYQ uploaded successfully!');
+      document.getElementById('pyqTitle').value = '';
+      document.getElementById('pyqFile').value = '';
+    } catch (error) {
+      console.error(error);
+      alert('PYQ upload failed!');
+    }
+  }
+</script>
 </html>
